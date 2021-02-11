@@ -9,6 +9,8 @@ library(ggraph)
 
 
 useNIADic()
+
+# 고유명사 사전 추가가
 mergeUserDic(data.frame(c("일기","청울림"), 
                         "ncn")) 
 
