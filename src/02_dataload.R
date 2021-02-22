@@ -75,6 +75,25 @@ cafe_viwer_func = function(data, start_date, end_date) {
   return(tid)
   
 }
+cafe_like_func = function(data, start_date, end_date) {
+  
+  data$date[str_length(data$date) == 5] = paste0(gsub("-",".",end_date),".")
+  data$date = ymd(data$date)
+  
+  data$writer = gsub("'","",data$writer)
+  data$writer = gsub("\\[","",data$writer)
+  data$writer = gsub("\\]","",data$writer)
+  # data$writer = gsub("\\[.*?\\]","",data$writer)
+  
+  data$like = gsub(",", "", data$like)
+  data$like = as.integer(data$like)
+  
+  tid = data %>% group_by(writer) %>% summarise(like_total = sum(like)) %>%
+    arrange(desc(like_total)) %>% as.data.frame()
+  
+  return(tid)
+  
+}
 cafe_reply_func = function(data, start_date, end_date) { 
   
   # cafeRepl = readxl::read_excel("D:/workspace/python_workspace/01_cafeCrawler/naverCafeReply_A.xlsx")
@@ -137,7 +156,7 @@ cafe_reply_func = function(data, start_date, end_date) {
 ### data load
 
 start_d = "2021-02-01"
-end_d = "2021-02-05"
+end_d = "2021-02-20"
 
 writers_df = read.csv("./data/members.csv", encoding = "cp949")
 #writers_df = read.csv("./data/members_mate.csv", encoding = "cp949")
