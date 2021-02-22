@@ -117,6 +117,25 @@ cafe_viwer_func = function(data, start_date, end_date) {
   return(tid)
   
 }
+cafe_like_func = function(data, start_date, end_date) {
+  
+  data$date[str_length(data$date) == 5] = paste0(gsub("-",".",end_date),".")
+  data$date = ymd(data$date)
+  
+  data$writer = gsub("'","",data$writer)
+  data$writer = gsub("\\[","",data$writer)
+  data$writer = gsub("\\]","",data$writer)
+  # data$writer = gsub("\\[.*?\\]","",data$writer)
+  
+  data$like = gsub(",", "", data$like)
+  data$like = as.integer(data$like)
+  
+  tid = data %>% group_by(writer) %>% summarise(like_total = sum(like)) %>%
+    arrange(desc(like_total)) %>% as.data.frame()
+  
+  return(tid)
+  
+}
 cafe_reply_func = function(data, start_date, end_date) { 
   
   # cafeRepl = readxl::read_excel("D:/workspace/python_workspace/01_cafeCrawler/naverCafeReply_A.xlsx")
@@ -186,7 +205,7 @@ cafe_reply_func = function(data, start_date, end_date) {
 ### data load
 
 start_d = "2021-02-01"
-end_d = "2021-02-05"
+end_d = "2021-02-20"
 
 #writers_df = read.csv("./data/members.csv", encoding = "cp949")
 writers_df = read.csv("./data/members_mate.csv", encoding = "cp949")
@@ -582,3 +601,102 @@ datatable(pp_tid3, filter = 'top',extensions = c('Scroller', 'Buttons'), options
 })
 ```
 
+
+
+
+
+
+Super like {data-icon="fa-thumbs-o-up"}
+=====================================
+
+
+
+
+    Inputs {.sidebar}
+-----------------------------------------------------------------------
+
+### Specify date range
+
+```{r}
+
+selectInput("i","Start Date",choices = unique(flag_tid$date), selected = min(flag_tid$date))
+selectInput("j","End Date",choices = unique(flag_tid$date), selected = max(flag_tid$date))
+
+```
+
+
+Column {data-width=700}
+-----------------------------------------------------------------------
+
+### Ranking Graph
+```{r}
+
+start_day_i = reactive({
+  input$i
+})
+
+end_day_j = reactive({
+  input$j
+})
+
+
+renderHighchart({
+
+pp_tid4 = cafe_like_func(cafeWritten, start_day_g(), end_day_h())
+
+
+
+pp_tid4 %>%
+  top_n(15) %>%
+  hchart('column',hcaes('writer','like_total')) %>%
+  hc_title(text = "like_total") %>%
+  hc_subtitle(text = "top 15 rank") %>%
+  hc_add_theme(hc_theme_chalk())
+
+# datatable(pp_tid3, filter = 'top',extensions = c('Scroller', 'Buttons'), options = list(
+#   deferRender = TRUE,
+#   scrollY = 700,
+#   scroller = TRUE,
+#   dom = 'Bfrtip',
+#   buttons = c('copy', 'excel')
+#
+# ))
+
+
+})
+```
+
+
+
+Column {data-width=300}
+-----------------------------------------------------------------------
+
+### Data Extract
+```{r}
+
+start_day_i = reactive({
+  input$i
+})
+
+end_day_j = reactive({
+  input$j
+})
+
+
+renderDataTable({
+
+pp_tid4 = cafe_like_func(cafeWritten, start_day_g(), end_day_h())
+
+
+datatable(pp_tid4, filter = 'top',extensions = c('Scroller', 'Buttons'), options = list(
+  deferRender = TRUE,
+  scrollY = 700,
+  scroller = TRUE,
+  dom = 'Bfrtip',
+  buttons = c('copy', 'excel')
+
+))
+
+
+})
+```
