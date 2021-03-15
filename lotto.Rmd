@@ -251,8 +251,9 @@ renderPrint({
                         당첨5등 = count_rank5,
                         꽝 = count_nope) %>% t()
   colnames(count_df) = "index"
+  
+  }
   print(count_df)
-}
 })
 
 # 
