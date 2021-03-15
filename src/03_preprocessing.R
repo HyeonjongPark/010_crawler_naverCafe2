@@ -31,7 +31,7 @@ colnames(total_reply_t)[2:ncol(total_reply_t)] = paste0(colnames(total_reply_t)[
 
 
 all_frame = left_join(total_write_t, total_reply_t)
-
+all_frame %>% head
 
 
 ord_a = seq(2,ncol(total_write_t),1)
@@ -51,7 +51,7 @@ all_frame = left_join(flag_df, all_frame)
 
 all_frame = left_join(all_frame, writers_df[,-1], by = c("writer" = "habit_mate"))
 
-all_frame = all_frame[,c(1,ncol(all_frame),3:(ncol(all_frame) -1) )]
+all_frame = all_frame[,c(1,ncol(all_frame),2:(ncol(all_frame) -1) )]
 
 write.csv(all_frame, "./out/all_frame.csv", row.names = F)
 

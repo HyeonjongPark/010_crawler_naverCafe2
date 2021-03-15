@@ -88,10 +88,10 @@ cafe_like_func = function(data, start_date, end_date) {
   data$like = gsub(",", "", data$like)
   data$like = as.integer(data$like)
   
-  tid = data %>% group_by(writer) %>% summarise(like_total = sum(like)) %>%
+  tid_like = data %>% group_by(writer) %>% summarise(like_total = sum(like)) %>%
     arrange(desc(like_total)) %>% as.data.frame()
   
-  return(tid)
+  return(tid_like)
   
 }
 cafe_reply_func = function(data, start_date, end_date) { 
@@ -155,8 +155,10 @@ cafe_reply_func = function(data, start_date, end_date) {
 
 ### data load
 
-start_d = "2021-02-01"
-end_d = "2021-02-20"
+start_d = Sys.Date() - 7
+end_d = Sys.Date()
+
+
 
 writers_df = read.csv("./data/members.csv", encoding = "cp949")
 #writers_df = read.csv("./data/members_mate.csv", encoding = "cp949")
