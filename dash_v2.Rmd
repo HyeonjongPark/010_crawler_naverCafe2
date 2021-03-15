@@ -200,15 +200,17 @@ cafe_reply_func = function(data, start_date, end_date) {
 #source("./src/06_members.R", encoding = "UTF-8")
 
 
+source("./src/03_preprocessing.R")
+
 
 
 ### data load
 
-start_d = "2021-02-01"
-end_d = "2021-02-20"
+start_d = Sys.Date() - 7
+end_d = Sys.Date()
 
 #writers_df = read.csv("./data/members.csv", encoding = "cp949")
-writers_df = read.csv("./data/members_mate.csv", encoding = "cp949")
+writers_df = read.csv("./data/members.csv", encoding = "cp949")
 
 writers = as.character(writers_df$habit_mate)
 
@@ -284,8 +286,8 @@ Power Writer {data-icon="fa-send"}
 
 ```{r}
 
-selectInput("c","Start Date",choices = unique(flag_tid$date), selected = min(flag_tid$date))
-selectInput("d","End Date",choices = unique(flag_tid$date), selected = max(flag_tid$date))
+selectInput("c","Start Date",choices = sort(unique(flag_tid$date)), selected = min(flag_tid$date))
+selectInput("d","End Date",choices = sort(unique(flag_tid$date)), selected = max(flag_tid$date))
 
 ```
 
@@ -409,8 +411,8 @@ Best Replier {data-icon="fa-weixin"}
 
 ```{r}
 
-selectInput("e","Start Date",choices = unique(flag_tid$date), selected = min(flag_tid$date))
-selectInput("f","End Date",choices = unique(flag_tid$date), selected = max(flag_tid$date))
+selectInput("e","Start Date",choices = sort(unique(flag_tid$date)), selected = min(flag_tid$date))
+selectInput("f","End Date",choices = sort(unique(flag_tid$date)), selected = max(flag_tid$date))
 
 ```
 
@@ -519,8 +521,8 @@ Popular Poster {data-icon="fa-chevron-circle-up"}
 
 ```{r}
 
-selectInput("g","Start Date",choices = unique(flag_tid$date), selected = min(flag_tid$date))
-selectInput("h","End Date",choices = unique(flag_tid$date), selected = max(flag_tid$date))
+selectInput("g","Start Date",choices = sort(unique(flag_tid$date)), selected = min(flag_tid$date))
+selectInput("h","End Date",choices = sort(unique(flag_tid$date)), selected = max(flag_tid$date))
 
 ```
 
@@ -606,6 +608,11 @@ datatable(pp_tid3, filter = 'top',extensions = c('Scroller', 'Buttons'), options
 
 
 
+
+
+
+
+
 Super like {data-icon="fa-thumbs-o-up"}
 =====================================
 
@@ -619,8 +626,8 @@ Super like {data-icon="fa-thumbs-o-up"}
 
 ```{r}
 
-selectInput("i","Start Date",choices = unique(flag_tid$date), selected = min(flag_tid$date))
-selectInput("j","End Date",choices = unique(flag_tid$date), selected = max(flag_tid$date))
+selectInput("i","Start Date",choices = sort(unique(flag_tid$date)), selected = min(flag_tid$date))
+selectInput("j","End Date",choices = sort(unique(flag_tid$date)), selected = max(flag_tid$date))
 
 ```
 
@@ -642,7 +649,7 @@ end_day_j = reactive({
 
 renderHighchart({
 
-pp_tid4 = cafe_like_func(cafeWritten, start_day_g(), end_day_h())
+pp_tid4 = cafe_like_func(cafeWritten, start_day_i(), end_day_j())
 
 
 
@@ -685,7 +692,7 @@ end_day_j = reactive({
 
 renderDataTable({
 
-pp_tid4 = cafe_like_func(cafeWritten, start_day_g(), end_day_h())
+pp_tid4 = cafe_like_func(cafeWritten, start_day_i(), end_day_j())
 
 
 datatable(pp_tid4, filter = 'top',extensions = c('Scroller', 'Buttons'), options = list(
