@@ -210,7 +210,8 @@ start_d = Sys.Date() - 7
 end_d = Sys.Date()
 
 #writers_df = read.csv("./data/members.csv", encoding = "cp949")
-writers_df = read.csv("./data/members.csv", encoding = "cp949")
+#writers_df = read.csv("./data/members.csv", encoding = "cp949")
+writers_df = read.table("./data/members.txt", sep = "\t", header = T)
 
 writers = as.character(writers_df$habit_mate)
 
@@ -219,7 +220,7 @@ cafeRepl = readxl::read_excel("./data/naverCafeReply_A.xlsx")
 
 flag_tid = cafe_write_func(cafeWritten, start_d, end_d)
 
-all_frame = read.csv("./out/all_frame.csv", encoding = "cp949")
+all_frame = read.csv("./out/all_frame.csv", encoding = "cp949",colClasses = "character")
 all_frame = as.data.frame(all_frame)
 
 
