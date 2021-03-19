@@ -49,7 +49,8 @@ all_frame = left_join(flag_df, all_frame)
 
 
 
-all_frame = left_join(all_frame, writers_df[,-1], by = c("writer" = "habit_mate"))
+
+all_frame = left_join(all_frame,writers_df, by = c("writer" = "habit_mate"))
 
 all_frame = all_frame[,c(1,ncol(all_frame),2:(ncol(all_frame) -1) )]
 

@@ -159,8 +159,9 @@ start_d = Sys.Date() - 7
 end_d = Sys.Date()
 
 
+writers_df = read.table("./data/members.txt", sep = "\t", header = T)
 
-writers_df = read.csv("./data/members.csv", encoding = "cp949")
+#writers_df = read.csv("./data/members_all.csv", encoding = "cp949")
 #writers_df = read.csv("./data/members_mate.csv", encoding = "cp949")
 
 writers = as.character(writers_df$habit_mate)
