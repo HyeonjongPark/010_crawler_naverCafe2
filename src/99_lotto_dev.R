@@ -30,9 +30,6 @@ rownames(real) = "row"
 bonus = 17
 
 
-
-
-
 Lotto_jackpot_code = function() {
   seed_number = as.integer(paste0(year(Sys.Date()),week(Sys.Date())))
   #set.seed(seed_number)
@@ -41,11 +38,6 @@ Lotto_jackpot_code = function() {
   
   return(lotto_number)
 }
-
-
-
-
-
 
 Lotto_simulation = function(lotto_df) {
   
@@ -149,4 +141,38 @@ for(i in 1:buy_count) {
   colnames(count_df) = "index"
   print(count_df)
 }
+
+
+
+
+
+
+
+
+
+testRec = list(source1 = data.frame(rec1 = c(1,2,3),
+                                rec2 = c(3,4,5)),
+               source2 = data.frame(rec1 = c(1,2,4,5),
+                                rec2 = c(1,3,2,1),
+                                rec3 = c(6,5,3,2)))
+
+
+
+
+
+
+memory.size (max = F)
+
+gc()
+a<-c(1:10000000)
+b<-c(1:20000000)
+c<-c(1:20000000)
+memory.size() 
+
+
+
+
+
+
+
 

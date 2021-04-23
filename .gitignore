@@ -37,3 +37,18 @@ vignettes/*.pdf
 
 # R Environment Variables
 .Renviron
+
+
+
+/data
+/rsconnect/
+/out/
+/busy.html
+/lotto.html
+/src/est.Rmd
+/src/98_habit_test.R
+/read_me.txt
+/010_crawler_naverCafe2.RProj
+/src/99_lotto_dev.R
+
+

@@ -450,7 +450,7 @@ total_bw %>%
   top_n(15) %>%
   hchart('column',hcaes('writer','total_reply')) %>%
   hc_title(text = "total_reply") %>%
-  hc_subtitle(text = "top 15 rank") %>%
+  hc_subtitle(text = "top 15 rank (Upto 150)") %>%
   hc_add_theme(hc_theme_darkunica())
 
 # datatable(total_bw, filter = 'top',extensions = c('Scroller', 'Buttons'), options = list(
