@@ -253,7 +253,7 @@ Action Check {data-icon="fa-list"}
 
 <br><br><br>
 ```{r}
-actionButton("dataExtraction_button", label="data 보기", style="color: red; background-color: #337ab7; border-color: #2e6da4")
+actionButton("dataExtraction_button", label="CheckList", style="color: red; background-color: #337ab7; border-color: #2e6da4")
 ```
 
 ```{r}
