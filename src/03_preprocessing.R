@@ -61,6 +61,3 @@ write.csv(all_frame, "./out/all_frame.csv", row.names = F)
 
 
 
-
-
-

@@ -26,23 +26,13 @@ always_allow_html : yes
 
 options(encoding = "cp949")
 
-## libralies
-library(data.table)
-library(shiny)
-library(shinycssloaders)
-library(flexdashboard)
-library(DT)
-library(dplyr)
-library(highcharter)
-library(lubridate)
-library(stringr)
-library(padr)
-library(readxl)
-library(tidyr)
+
+
+## preprocessing
+#source("./src/03_preprocessing.R")
 
 
 ## function
-
 
 cafe_write_func = function(data, start_date, end_date) {
   
@@ -200,7 +190,6 @@ cafe_reply_func = function(data, start_date, end_date) {
 #source("./src/06_members.R", encoding = "UTF-8")
 
 
-source("./src/03_preprocessing.R")
 
 
 
@@ -708,3 +697,5 @@ datatable(pp_tid4, filter = 'top',extensions = c('Scroller', 'Buttons'), options
 
 })
 ```
+
+deployApp()
